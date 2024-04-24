@@ -1,12 +1,11 @@
-package com.example.newslist.magicCards
+package com.example.newslist
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.newslist.R
 
-class MagicCardsActivity : AppCompatActivity() {
+class NewsListDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_magic_cards2)
+        setContentView(R.layout.activity_news_list_detail)
     }
 }
