@@ -67,7 +67,7 @@ class NewsListViewModel : ViewModel() {
                 try {
                     val inputStream = ByteArrayInputStream(webResult.result.toByteArray(StandardCharsets.UTF_8))
                     val parsedNewsList = newsListParser.parse(inputStream)  // Parse the XML into a list
-                    parsedNewsList  // Return the parsed list.
+                    parsedNewsList.sortedBy { it.title }  // Return the parsed list.
                 } catch (e: Exception) { // Generic exception handling for parsing
                     Log.e(MainActivity.LOG_TAG, "Parsing error", e)
                     _hasError.postValue(true)
