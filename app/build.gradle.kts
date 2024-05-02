@@ -60,6 +60,7 @@ dependencies {
 
      
     implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation("androidx.preference:preference-ktx:1.2.1")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -2,16 +2,20 @@ package com.example.newslist
 
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.preference.PreferenceManager
 import com.example.newslist.adapter.NewsListAdapter
 import com.example.newslist.databinding.ActivityMainBinding
 import com.example.newslist.viewModel.NewsListViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
 
     companion object {
@@ -70,6 +74,37 @@ class MainActivity : AppCompatActivity() {
             // Add other extras as needed
             startActivity(intent)
         }
+        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+        preferences.registerOnSharedPreferenceChangeListener(this)
     }
 
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        if("sync" == key){
+            val shouldSync = sharedPreferences?.getBoolean(key, false) ?:false
+            Log.i(LOG_TAG, "should sync: $shouldSync")
+        }
+        if("showImages" == key){
+            val showImages = sharedPreferences?.getBoolean(key, false) ?:false
+        }
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //item.itemId == R.id.menu_settings
+        when(item.itemId){
+            R.id.menu_settings -> {
+                val settingsActivityIntent = Intent(this, SettingsActivity::class.java)
+                startActivity(settingsActivityIntent)
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
 }
