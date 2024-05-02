@@ -6,6 +6,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.newslist.databinding.ActivityNewsListDetailBinding
 import com.bumptech.glide.Glide
+import android.text.Html
+import android.os.Build
+
 
 class NewsListDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewsListDetailBinding
@@ -15,7 +18,6 @@ class NewsListDetailActivity : AppCompatActivity() {
         binding = ActivityNewsListDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Extract data from intent
         val title = intent.getStringExtra("title") ?: "N/A"
         val author = intent.getStringExtra("author") ?: "Unknown"
         val pubDate = intent.getStringExtra("pubDate") ?: "Unknown Date"
@@ -23,13 +25,15 @@ class NewsListDetailActivity : AppCompatActivity() {
         val imageUrl = intent.getStringExtra("imageUrl") ?: ""
         val articleLink = intent.getStringExtra("articleLink") ?: ""
 
-        // Set data to views
+
         binding.tvTitle.text = title
         binding.tvAuthor.text = author
         binding.tvPubDate.text = pubDate
-        binding.tvDescription.text = description
 
-        // Load image using Glide
+        // Render HTML description
+        binding.tvDescription.text = Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
+
+
         Glide.with(this)
             .load(imageUrl)
             .into(binding.ivImageUrl)
