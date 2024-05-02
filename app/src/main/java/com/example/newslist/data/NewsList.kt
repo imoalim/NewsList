@@ -8,13 +8,13 @@ data class NewsList (
     val description:  String,
     val imageUrl: String,
     val author: String,
-    val publicationDate: Date,
+    val pubDate: Date,
     val articleLink: String,
     val keywords: String
 
 ){
     override fun toString(): String {
-        return "$id, $title, $description, $imageUrl, $author, $publicationDate, $articleLink, $keywords"
+        return "$id, $title, $description, $imageUrl, $author, $pubDate, $articleLink, $keywords"
     }
 
 }

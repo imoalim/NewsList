@@ -18,12 +18,12 @@ class NewsListLoader {
                 String(inputStream.readBytes())
             }.let { Success(it) }
         } catch (ioException: IOException) {
-            Failed("There was an error fetching the data", throwable = ioException)
+            Failed("There was an error fetching the data. \n $ioException", throwable = ioException)
         } finally {
             urlConnection.disconnect()
         }
-    }
 
+    }
 }
 sealed interface FetchNewsListResult
 class Success(val result: String) : FetchNewsListResult
